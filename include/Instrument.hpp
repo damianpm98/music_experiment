@@ -1,6 +1,8 @@
 #ifndef INSTRUMENT_HPP
 #define INSTRUMENT_HPP
 
+#include <iostream>
+
 class Instrument {
   public:
     virtual void playSound(int note) = 0; // Pure virtual function
