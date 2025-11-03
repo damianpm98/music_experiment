@@ -1,10 +1,10 @@
 #ifndef MAIN_CPP
 #define MAIN_CPP
 
-#include <iostream>
+#include <Utils.hpp>
 
 int main() {
-    std::cout << "Hello, Music Experiment!" << std::endl;
+    printMessage("Hello, Music Experiment!");
     return 0;
 }
 
