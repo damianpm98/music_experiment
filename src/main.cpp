@@ -3,14 +3,17 @@
 
 #include <Bass.hpp>
 #include <Guitar.hpp>
-#include <Human.hpp>
-#include <Utils.hpp>
+#include <Musician.hpp>
 
 int main() {
     printMessage("Hello, Music Experiment!");
-    Guitar myGuitar("Yamaha", "P-45", "Alice", 123456, 12);
-    Bass myBass("Fender", "Jazz Bass", "Bob", 654321, 4);
-    Human myHuman("John", "Mayer", 212121);
+    Musician myMusician("John", "Mayer", 212121);
+    myMusician.addInstrumentSkill("Guitar", 9);
+    myMusician.addInstrumentSkill("Bass", 7);
+    myMusician.checkInstrumentalSkills();
+    myMusician.addGuitar(Guitar("Yamaha", "P-45", "Alice", 123456, 12));
+    myMusician.addBass(Bass("Fender", "Jazz Bass", "Bob", 654321, 4));
+    myMusician.checkInstruments();
     return 0;
 }
 

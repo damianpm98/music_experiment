@@ -26,6 +26,23 @@ class Bass : public Instrument {
         std::cout << "Bass playing note " << std::to_string(note) << std::endl;
     }
 
+    friend std::ostream &operator<<(std::ostream &os, const Bass &bass) {
+        os << "Bass Info:" << std::endl;
+        os << "Brand: " << bass._brandName << std::endl;
+        os << "Model: " << bass._modelName << std::endl;
+        os << "Owner: " << bass._ownerName << std::endl;
+        os << "Serial Number: " << bass._serialNumber << std::endl;
+        return os;
+    }
+
+    friend bool operator==(const Bass &lhs, const Bass &rhs) {
+        return (lhs._brandName == rhs._brandName &&
+                lhs._modelName == rhs._modelName &&
+                lhs._ownerName == rhs._ownerName &&
+                lhs._serialNumber == rhs._serialNumber &&
+                lhs._numberOfStrings == rhs._numberOfStrings);
+    }
+
   private:
     int _numberOfStrings;
 };
