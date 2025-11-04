@@ -3,12 +3,14 @@
 
 #include <Bass.hpp>
 #include <Guitar.hpp>
+#include <Human.hpp>
 #include <Utils.hpp>
 
 int main() {
     printMessage("Hello, Music Experiment!");
     Guitar myGuitar("Yamaha", "P-45", "Alice", 123456, 12);
     Bass myBass("Fender", "Jazz Bass", "Bob", 654321, 4);
+    Human myHuman("John", "Mayer", 212121);
     return 0;
 }
 
