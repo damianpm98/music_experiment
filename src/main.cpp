@@ -3,6 +3,7 @@
 
 #include <Bass.hpp>
 #include <Guitar.hpp>
+#include <Metronome.hpp>
 #include <Musician.hpp>
 
 int main() {
@@ -14,6 +15,20 @@ int main() {
     myMusician.addGuitar(Guitar("Yamaha", "P-45", "Alice", 123456, 12));
     myMusician.addBass(Bass("Fender", "Jazz Bass", "Bob", 654321, 4));
     myMusician.checkInstruments();
+
+    // Metronome test
+    Metronome myMetronome(120);
+    myMetronome.start();
+
+    sleepForMilliseconds(2000);
+    myMetronome.pause();
+
+    sleepForMilliseconds(3000);
+    myMetronome.resume();
+
+    while (!myMetronome.isSongFinished()) {
+        sleepForMilliseconds(1000);
+    }
     return 0;
 }
 
