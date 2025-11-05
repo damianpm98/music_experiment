@@ -100,4 +100,44 @@ void Musician::checkInstruments() const {
     }
 }
 
+void Musician::addSong(
+    std::string instrument,
+    std::map<std::string, std::map<int, std::map<float, float>>> &song) {
+
+    std::string songName = song.begin()->first;
+
+    if (instrument == "Guitar") {
+        for (auto &it : _guitarSongs) {
+            if (it.first == songName) {
+                std::cout << "Song " << songName
+                          << " already exists for musician" << _name << " "
+                          << _surname << ". Changing music sheet for that song"
+                          << std::endl;
+                it.second = song.begin()->second;
+                return;
+            }
+        }
+        _guitarSongs.insert(song.begin(), song.end());
+        std::cout << "Added Guitar song " << songName << " to musician "
+                  << _name << " " << _surname << "." << std::endl;
+    } else if (instrument == "Bass") {
+        for (auto &it : _bassSongs) {
+            if (it.first == songName) {
+                std::cout << "Song " << songName
+                          << " already exists for musician" << _name << " "
+                          << _surname << ". Changing music sheet for that song"
+                          << std::endl;
+                it.second = song.begin()->second;
+                return;
+            }
+        }
+        _bassSongs.insert(song.begin(), song.end());
+        std::cout << "Added Bass song " << songName << " to musician " << _name
+                  << " " << _surname << "." << std::endl;
+    } else {
+        std::cout << "Instrument " << instrument
+                  << " not recognized. Song not added." << std::endl;
+        throw "Instrument " + instrument + " not recognized. Song not added.";
+    }
+}
 #endif // !MUSICIAN_CPP

@@ -22,11 +22,18 @@ class Musician : public Human {
     void addBass(const Bass &bass);
     void checkInstrumentalSkills() const;
     void checkInstruments() const;
+    void
+    addSong(std::string instrument,
+            std::map<std::string, std::map<int, std::map<float, float>>> &song);
 
   private:
-    std::map<std::string, int> _instrumentSkill = {};
     std::list<Guitar> _guitars;
     std::list<Bass> _basses;
+    std::map<std::string, int> _instrumentSkill = {}; // skills -> skill level
+    std::map<std::string, std::map<int, std::map<float, float>>> _guitarSongs =
+        {}; // name of song -> string -> (tempo -> duration)
+    std::map<std::string, std::map<int, std::map<float, float>>> _bassSongs =
+        {}; // name of song -> string -> (tempo -> duration)
 };
 
 #endif // !MUSICIAN_HPP
