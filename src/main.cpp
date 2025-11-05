@@ -27,7 +27,23 @@ int main() {
           {2,
            {{110.0f, 2.0f}, {140.0f, 4.0f}, {120.0f, 3.0f}, {70.0f, 3.0f}}}}}};
 
-    myMusician.addGuitarSong(guitarSong);
+    try {
+        myMusician.addSong("Guitar", guitarSong);
+    } catch (const char *msg) {
+        std::cout << "Error adding song: " << msg << std::endl;
+    } catch (...) {
+        std::cout << "An unexpected error occurred while adding the song."
+                  << std::endl;
+    }
+
+    try {
+        myMusician.addSong("Piano", guitarSong);
+    } catch (std::string msg) {
+        std::cout << "Error adding song: " << msg << std::endl;
+    } catch (...) {
+        std::cout << "An unexpected error occurred while adding the song."
+                  << std::endl;
+    }
 
 // Metronome test
 #ifdef METRONOME_TEST
