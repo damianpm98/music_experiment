@@ -100,4 +100,22 @@ void Musician::checkInstruments() const {
     }
 }
 
+void Musician::addGuitarSong(
+    std::map<std::string, std::map<int, std::map<float, float>>> &song) {
+
+    std::string songName = song.begin()->first;
+
+    for (auto &it : _guitarSongs) {
+        if (it.first == songName) {
+            std::cout << "Song " << songName << " already exists for musician"
+                      << _name << " " << _surname
+                      << ". Changing music sheet for that song" << std::endl;
+            it.second = song.begin()->second;
+            return;
+        }
+    }
+    _guitarSongs.insert(song.begin(), song.end());
+    std::cout << "Added song " << songName << " to musician " << _name << " "
+              << _surname << "." << std::endl;
+}
 #endif // !MUSICIAN_CPP

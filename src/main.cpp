@@ -9,14 +9,28 @@
 int main() {
     printMessage("Hello, Music Experiment!");
     Musician myMusician("John", "Mayer", 212121);
+
+#ifdef VERBOSE
     myMusician.addInstrumentSkill("Guitar", 9);
     myMusician.addInstrumentSkill("Bass", 7);
     myMusician.checkInstrumentalSkills();
+
     myMusician.addGuitar(Guitar("Yamaha", "P-45", "Alice", 123456, 12));
     myMusician.addBass(Bass("Fender", "Jazz Bass", "Bob", 654321, 4));
     myMusician.checkInstruments();
+#endif // VERBOSE
 
-    // Metronome test
+    // Add song test
+    std::map<std::string, std::map<int, std::map<float, float>>> guitarSong = {
+        {"Stairway to heaven",
+         {{1, {{120.0f, 2.5f}, {130.0f, 3.0f}, {100.0f, 3.0f}, {90.0f, 3.0f}}},
+          {2,
+           {{110.0f, 2.0f}, {140.0f, 4.0f}, {120.0f, 3.0f}, {70.0f, 3.0f}}}}}};
+
+    myMusician.addGuitarSong(guitarSong);
+
+// Metronome test
+#ifdef METRONOME_TEST
     Metronome myMetronome(120);
     myMetronome.start();
 
@@ -29,6 +43,8 @@ int main() {
     while (!myMetronome.isSongFinished()) {
         sleepForMilliseconds(1000);
     }
+#endif // METRONOME_TEST
+
     return 0;
 }
 
