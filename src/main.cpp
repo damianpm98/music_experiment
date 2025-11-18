@@ -6,6 +6,10 @@
 #include <Metronome.hpp>
 #include <Musician.hpp>
 
+inline void
+includeSong(Musician &musician, std::string instrument,
+            std::map<std::string, std::map<int, std::map<float, float>>> &song);
+
 int main() {
     printMessage("Hello, Music Experiment!");
     Musician myMusician("John", "Mayer", 212121);
@@ -31,32 +35,9 @@ int main() {
          {{1, {{100.0f, 2.5f}, {130.0f, 3.0f}, {60.0f, 3.0f}, {90.0f, 3.0f}}},
           {2, {{85.0f, 2.0f}, {140.0f, 4.0f}, {55.0f, 3.0f}, {70.0f, 3.0f}}}}}};
 
-    try {
-        myMusician.addSong("Guitar", guitarSong);
-    } catch (const char *msg) {
-        std::cout << "Error adding song: " << msg << std::endl;
-    } catch (...) {
-        std::cout << "An unexpected error occurred while adding the song."
-                  << std::endl;
-    }
-
-    try {
-        myMusician.addSong("Piano", guitarSong);
-    } catch (std::string msg) {
-        std::cout << "Error adding song: " << msg << std::endl;
-    } catch (...) {
-        std::cout << "An unexpected error occurred while adding the song."
-                  << std::endl;
-    }
-
-    try {
-        myMusician.addSong("Bass", bassSong);
-    } catch (std::string msg) {
-        std::cout << "Error adding song: " << msg << std::endl;
-    } catch (...) {
-        std::cout << "An unexpected error occurred while adding the song."
-                  << std::endl;
-    }
+    includeSong(myMusician, "Guitar", guitarSong);
+    includeSong(myMusician, "Piano", guitarSong);
+    includeSong(myMusician, "Bass", bassSong);
 
     myMusician.songsList();
 
@@ -77,6 +58,20 @@ int main() {
 #endif // METRONOME_TEST
 
     return 0;
+}
+
+inline void includeSong(
+    Musician &musician, std::string instrument,
+    std::map<std::string, std::map<int, std::map<float, float>>> &song) {
+
+    try {
+        musician.addSong(instrument, song);
+    } catch (const char *msg) {
+        std::cout << "Error adding song: " << msg << std::endl;
+    } catch (...) {
+        std::cout << "An unexpected error occurred while adding the song."
+                  << std::endl;
+    }
 }
 
 #endif // !MAIN_CPP
