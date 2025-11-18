@@ -25,6 +25,7 @@ class Musician : public Human {
     void
     addSong(std::string instrument,
             std::map<std::string, std::map<int, std::map<float, float>>> &song);
+    void songsList() const;
 
   private:
     std::list<Guitar> _guitars;
