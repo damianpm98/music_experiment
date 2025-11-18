@@ -100,40 +100,36 @@ void Musician::checkInstruments() const {
     }
 }
 
-void Musician::addSong(
-    std::string instrument,
-    std::map<std::string, std::map<int, std::map<float, float>>> &song) {
-
-    std::string songName = song.begin()->first;
+void Musician::addSong(std::string instrument, Song &song) {
 
     if (instrument == "Guitar") {
         for (auto &it : _guitarSongs) {
-            if (it.first == songName) {
-                std::cout << "Song " << songName
+            if (it.title == song.title) {
+                std::cout << "Song " << song.title
                           << " already exists for musician" << _name << " "
                           << _surname << ". Changing music sheet for that song"
                           << std::endl;
-                it.second = song.begin()->second;
+                it.musicSheet = song.musicSheet;
                 return;
             }
         }
-        _guitarSongs.insert(song.begin(), song.end());
-        std::cout << "Added Guitar song " << songName << " to musician "
+        _guitarSongs.push_back(song);
+        std::cout << "Added Guitar song " << song.title << " to musician "
                   << _name << " " << _surname << "." << std::endl;
     } else if (instrument == "Bass") {
         for (auto &it : _bassSongs) {
-            if (it.first == songName) {
-                std::cout << "Song " << songName
+            if (it.title == song.title) {
+                std::cout << "Song " << song.title
                           << " already exists for musician" << _name << " "
                           << _surname << ". Changing music sheet for that song"
                           << std::endl;
-                it.second = song.begin()->second;
+                it.musicSheet = song.musicSheet;
                 return;
             }
         }
-        _bassSongs.insert(song.begin(), song.end());
-        std::cout << "Added Bass song " << songName << " to musician " << _name
-                  << " " << _surname << "." << std::endl;
+        _bassSongs.push_back(song);
+        std::cout << "Added Bass song " << song.title << " to musician "
+                  << _name << " " << _surname << "." << std::endl;
     } else {
         std::cout << "Instrument " << instrument
                   << " not recognized. Song not added." << std::endl;
@@ -154,7 +150,9 @@ void Musician::songsList() const {
                       << " Guitar Songs:" << std::endl;
 
             for (const auto &song : _guitarSongs) {
-                std::cout << song.first << std::endl;
+                std::cout << song.artist << " - " << song.title
+                          << " / Album: " << song.album
+                          << " / Release year: " << song.year << std::endl;
             }
         }
 
@@ -163,7 +161,9 @@ void Musician::songsList() const {
                       << " Bass Songs:" << std::endl;
 
             for (const auto &song : _bassSongs) {
-                std::cout << song.first << std::endl;
+                std::cout << song.artist << " - " << song.title
+                          << " / Album: " << song.album
+                          << " / Release year: " << song.year << std::endl;
             }
         }
     }

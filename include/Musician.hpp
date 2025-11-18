@@ -7,6 +7,16 @@
 #include <Utils.hpp>
 #include <list>
 #include <map>
+#include <string>
+
+struct Song {
+    std::string artist;
+    std::string album;
+    std::string title;
+    int year;
+    std::map<int, std::map<float, float>>
+        musicSheet; // string -> (tempo -> duration)
+};
 
 class Musician : public Human {
   public:
@@ -22,19 +32,15 @@ class Musician : public Human {
     void addBass(const Bass &bass);
     void checkInstrumentalSkills() const;
     void checkInstruments() const;
-    void
-    addSong(std::string instrument,
-            std::map<std::string, std::map<int, std::map<float, float>>> &song);
+    void addSong(std::string instrument, Song &song);
     void songsList() const;
 
   private:
     std::list<Guitar> _guitars;
     std::list<Bass> _basses;
     std::map<std::string, int> _instrumentSkill = {}; // skills -> skill level
-    std::map<std::string, std::map<int, std::map<float, float>>> _guitarSongs =
-        {}; // name of song -> string -> (tempo -> duration)
-    std::map<std::string, std::map<int, std::map<float, float>>> _bassSongs =
-        {}; // name of song -> string -> (tempo -> duration)
+    std::list<Song> _guitarSongs = {};
+    std::list<Song> _bassSongs = {};
 };
 
 #endif // !MUSICIAN_HPP

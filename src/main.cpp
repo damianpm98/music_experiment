@@ -6,9 +6,7 @@
 #include <Metronome.hpp>
 #include <Musician.hpp>
 
-inline void
-includeSong(Musician &musician, std::string instrument,
-            std::map<std::string, std::map<int, std::map<float, float>>> &song);
+inline void includeSong(Musician &musician, std::string instrument, Song &song);
 
 int main() {
     printMessage("Hello, Music Experiment!");
@@ -25,15 +23,19 @@ int main() {
 #endif // VERBOSE
 
     // Add song test
-    std::map<std::string, std::map<int, std::map<float, float>>> guitarSong = {
-        {"Stairway to heaven",
-         {{1, {{120.0f, 2.5f}, {130.0f, 3.0f}, {100.0f, 3.0f}, {90.0f, 3.0f}}},
-          {2, {{110.0f, 2.0f}, {60.0f, 4.0f}, {80.0f, 3.0f}, {70.0f, 3.0f}}}}}};
+    std::map<int, std::map<float, float>> guitarSheet = {
+        {{1, {{120.0f, 2.5f}, {130.0f, 3.0f}, {100.0f, 3.0f}, {90.0f, 3.0f}}},
+         {2, {{110.0f, 2.0f}, {60.0f, 4.0f}, {80.0f, 3.0f}, {70.0f, 3.0f}}}}};
 
-    std::map<std::string, std::map<int, std::map<float, float>>> bassSong = {
-        {"Nightmare",
-         {{1, {{100.0f, 2.5f}, {130.0f, 3.0f}, {60.0f, 3.0f}, {90.0f, 3.0f}}},
-          {2, {{85.0f, 2.0f}, {140.0f, 4.0f}, {55.0f, 3.0f}, {70.0f, 3.0f}}}}}};
+    Song guitarSong = {"Led Zeppelin", "Led Zeppelin IV", "Stairway to Heaven",
+                       1971, guitarSheet};
+
+    std::map<int, std::map<float, float>> bassSheet = {
+        {{1, {{100.0f, 2.5f}, {130.0f, 3.0f}, {60.0f, 3.0f}, {90.0f, 3.0f}}},
+         {2, {{85.0f, 2.0f}, {140.0f, 4.0f}, {55.0f, 3.0f}, {70.0f, 3.0f}}}}};
+
+    Song bassSong = {"Pink Floyd", "The Dark Side of the Moon", "Money", 1973,
+                     bassSheet};
 
     includeSong(myMusician, "Guitar", guitarSong);
     includeSong(myMusician, "Piano", guitarSong);
@@ -60,9 +62,8 @@ int main() {
     return 0;
 }
 
-inline void includeSong(
-    Musician &musician, std::string instrument,
-    std::map<std::string, std::map<int, std::map<float, float>>> &song) {
+inline void includeSong(Musician &musician, std::string instrument,
+                        Song &song) {
 
     try {
         musician.addSong(instrument, song);
