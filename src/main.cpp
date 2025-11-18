@@ -24,8 +24,12 @@ int main() {
     std::map<std::string, std::map<int, std::map<float, float>>> guitarSong = {
         {"Stairway to heaven",
          {{1, {{120.0f, 2.5f}, {130.0f, 3.0f}, {100.0f, 3.0f}, {90.0f, 3.0f}}},
-          {2,
-           {{110.0f, 2.0f}, {140.0f, 4.0f}, {120.0f, 3.0f}, {70.0f, 3.0f}}}}}};
+          {2, {{110.0f, 2.0f}, {60.0f, 4.0f}, {80.0f, 3.0f}, {70.0f, 3.0f}}}}}};
+
+    std::map<std::string, std::map<int, std::map<float, float>>> bassSong = {
+        {"Nightmare",
+         {{1, {{100.0f, 2.5f}, {130.0f, 3.0f}, {60.0f, 3.0f}, {90.0f, 3.0f}}},
+          {2, {{85.0f, 2.0f}, {140.0f, 4.0f}, {55.0f, 3.0f}, {70.0f, 3.0f}}}}}};
 
     try {
         myMusician.addSong("Guitar", guitarSong);
@@ -44,6 +48,17 @@ int main() {
         std::cout << "An unexpected error occurred while adding the song."
                   << std::endl;
     }
+
+    try {
+        myMusician.addSong("Bass", bassSong);
+    } catch (std::string msg) {
+        std::cout << "Error adding song: " << msg << std::endl;
+    } catch (...) {
+        std::cout << "An unexpected error occurred while adding the song."
+                  << std::endl;
+    }
+
+    myMusician.songsList();
 
 // Metronome test
 #ifdef METRONOME_TEST

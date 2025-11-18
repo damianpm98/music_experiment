@@ -140,4 +140,32 @@ void Musician::addSong(
         throw "Instrument " + instrument + " not recognized. Song not added.";
     }
 }
+
+void Musician::songsList() const {
+
+    if (_guitarSongs.empty() && _bassSongs.empty()) {
+        std::cout << "Musician " << _name << " " << _surname << " has no songs."
+                  << std::endl;
+        return;
+    } else {
+
+        if (!_guitarSongs.empty()) {
+            std::cout << "Musician " << _name << " " << _surname
+                      << " Guitar Songs:" << std::endl;
+
+            for (const auto &song : _guitarSongs) {
+                std::cout << song.first << std::endl;
+            }
+        }
+
+        if (!_bassSongs.empty()) {
+            std::cout << "Musician " << _name << " " << _surname
+                      << " Bass Songs:" << std::endl;
+
+            for (const auto &song : _bassSongs) {
+                std::cout << song.first << std::endl;
+            }
+        }
+    }
+}
 #endif // !MUSICIAN_CPP
